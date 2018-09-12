@@ -1,4 +1,4 @@
-package SENA;
+package sena;
 import java.awt.*;
 import java.applet.*;
 

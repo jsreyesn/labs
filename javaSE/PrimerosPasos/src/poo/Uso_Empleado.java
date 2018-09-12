@@ -24,11 +24,19 @@ public class Uso_Empleado {
 		           " Sueldo: "+empleado3.damesueldo()+
 		           " Fecha de Alta: "+empleado3.dameFechaContrato());*/
 		
-		Empleado[] misEmpleados = new Empleado[3];
+		Jefatura jefe_RRHH= new Jefatura("Steve Reyes",55000,2006,9,25);
+		
+		jefe_RRHH.estableceIncentivo(2570);
+		
+		Empleado[] misEmpleados = new Empleado[6];
 		
 		misEmpleados[0]= new Empleado("Paco Gomez",85000,1990,12,17);
 		misEmpleados[1]= new Empleado("Ana Lopez",95000,1995,6,2);
 		misEmpleados[2]= new Empleado("Maria Martin",105000,2002,3,15);
+		misEmpleados[3]= new Empleado("Antonio Fernández",30000,2000,1,1);
+		misEmpleados[4]= jefe_RRHH; // Polimorfismo en acción. Principio de acción.
+		misEmpleados[5]= new Jefatura("Maria",95000,1999,5,26); // Polimorfismo en acción. Principio de acción.
+		
 		
 		/*for(int i=0;i<3;i++) {
 			
@@ -67,6 +75,10 @@ class Empleado {
 		altaContrato = calendario.getTime();
 	}
 	
+	public Empleado(String nom) {
+		this(nom,30000,2000,1,1);
+	}
+	
 	public String dameNombre() {
 		return nombre;
 	}
@@ -89,5 +101,30 @@ class Empleado {
 	private String nombre;
 	private double sueldo;
 	private Date altaContrato;
+	
+}
+
+
+class Jefatura extends Empleado{
+	
+	private double incentivo;
+	
+	public Jefatura(String nom, double sue, int agno, int mes, int dia) {
+		
+		super(nom,sue,agno,mes,dia);
+		
+	}
+	
+	public void estableceIncentivo(double b) {
+		
+		incentivo = b;
+		
+	}
+	
+	public double damesueldo() {
+		
+		double sueldoJefe = super.damesueldo();
+		return sueldoJefe + incentivo;
+	}
 	
 }
