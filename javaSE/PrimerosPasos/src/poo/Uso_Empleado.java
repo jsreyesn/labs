@@ -37,6 +37,8 @@ public class Uso_Empleado {
 		misEmpleados[4]= jefe_RRHH; // Polimorfismo en acción. Principio de acción.
 		misEmpleados[5]= new Jefatura("Maria",95000,1999,5,26); // Polimorfismo en acción. Principio de acción.
 		
+		Jefatura jefaFinanzas = (Jefatura)misEmpleados[5]; // Casting de objetos > Convierte de tipo misEmpleados a tipo Jefatura
+		jefaFinanzas.estableceIncentivo(55000);
 		
 		/*for(int i=0;i<3;i++) {
 			
@@ -126,5 +128,7 @@ class Jefatura extends Empleado{
 		double sueldoJefe = super.damesueldo();
 		return sueldoJefe + incentivo;
 	}
+	
+    
 	
 }
