@@ -39,17 +39,20 @@ public class Uso_Empleado {
 		
 		Jefatura jefaFinanzas = (Jefatura)misEmpleados[5]; // Casting de objetos > Convierte de tipo misEmpleados a tipo Jefatura
 		jefaFinanzas.estableceIncentivo(55000);
-		
+				
 		/*for(int i=0;i<3;i++) {
 			
 			misEmpleados[i].subeSueldo(5);
 		}*/
+		
+		System.out.println(jefaFinanzas.tomar_decisiones("Dar más días de vacaciones a empleados"));
 		
 		for(Empleado e: misEmpleados) {
 			
 			e.subeSueldo(5);
 		}
 		
+		Arrays.sort(misEmpleados);
 		
 		/*for(int i=0;i<3;i++) {
 			System.out.println("Nombre: "+misEmpleados[i].dameNombre()+
@@ -67,7 +70,7 @@ public class Uso_Empleado {
 
 }
 
-class Empleado {
+class Empleado implements Comparable{
 	
 	public Empleado(String nom, double sue, int agno, int mes, int dia) {
 		
@@ -100,6 +103,21 @@ class Empleado {
 		
 	}
 	
+	public int compareTo(Object miObjeto) {
+		
+		Empleado otroEmpleado = (Empleado)miObjeto;
+		
+		if(this.sueldo<otroEmpleado.sueldo) {
+			return -1;
+		}
+		
+		if(this.sueldo>otroEmpleado.sueldo) {
+			return 1;
+		}
+		
+		return 0;
+	}
+	
 	private String nombre;
 	private double sueldo;
 	private Date altaContrato;
@@ -107,13 +125,19 @@ class Empleado {
 }
 
 
-class Jefatura extends Empleado{
+class Jefatura extends Empleado implements Jefes{
 	
 	private double incentivo;
 	
 	public Jefatura(String nom, double sue, int agno, int mes, int dia) {
 		
 		super(nom,sue,agno,mes,dia);
+		
+	}
+	
+	public String tomar_decisiones(String decision) {
+		
+		return "Un miembro de la dirección ha tomado la decisión de: "+decision;
 		
 	}
 	
