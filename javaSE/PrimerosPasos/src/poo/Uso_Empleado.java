@@ -39,13 +39,18 @@ public class Uso_Empleado {
 		
 		Jefatura jefaFinanzas = (Jefatura)misEmpleados[5]; // Casting de objetos > Convierte de tipo misEmpleados a tipo Jefatura
 		jefaFinanzas.estableceIncentivo(55000);
-				
+						
 		/*for(int i=0;i<3;i++) {
 			
 			misEmpleados[i].subeSueldo(5);
 		}*/
 		
 		System.out.println(jefaFinanzas.tomar_decisiones("Dar más días de vacaciones a empleados"));
+		
+		
+		System.out.println("El Jefe "+jefaFinanzas.dameNombre()+" tiene un bonus de: "+
+		jefaFinanzas.establece_bonus(500));
+		System.out.println(misEmpleados[3].dameNombre()+" tiene un bonus de: "+misEmpleados[3].establece_bonus(200));
 		
 		for(Empleado e: misEmpleados) {
 			
@@ -70,7 +75,7 @@ public class Uso_Empleado {
 
 }
 
-class Empleado implements Comparable{
+class Empleado implements Comparable, Trabajadores{
 	
 	public Empleado(String nom, double sue, int agno, int mes, int dia) {
 		
@@ -78,6 +83,11 @@ class Empleado implements Comparable{
 		sueldo = sue;
 		GregorianCalendar calendario = new GregorianCalendar(agno,mes-1,dia);
 		altaContrato = calendario.getTime();
+	}
+	
+	public double establece_bonus(double gratificacion) {
+		
+		return Trabajadores.bonus_base+gratificacion;
 	}
 	
 	public Empleado(String nom) {
@@ -139,6 +149,11 @@ class Jefatura extends Empleado implements Jefes{
 		
 		return "Un miembro de la dirección ha tomado la decisión de: "+decision;
 		
+	}
+	
+	public double establece_bonus(double gratificacion) {
+		double prima = 2000;
+		return Trabajadores.bonus_base + gratificacion+ prima;
 	}
 	
 	public void estableceIncentivo(double b) {
